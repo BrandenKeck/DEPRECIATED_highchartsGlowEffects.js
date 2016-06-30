@@ -3,9 +3,11 @@ A plug-in for highcharts.js that allows the user to add glowing effects to hover
 jsfiddle Hover Example Link:  [Hover Example](https://jsfiddle.net/BrandenKeck/ro0j4qp0/1/)  
 jsfiddle Select Example Link:  [Select Example](https://jsfiddle.net/BrandenKeck/j1d807zg/6/)  
   
-*Warning: using these functions will disable allowPointSelect, select events, and hover events*  
-*Select and hover events can be passed in the form of a function using the plug-in modules*  
-*To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript*  
+**Warning: using these functions will disable allowPointSelect, select events, and hover events**  
+**Select and hover events can be passed in the form of a function using the plug-in modules**  
+**You may chose to not pass a functions and colors.  In this case, the parameter will be ignored**
+**To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript**  
+
   
 # Hover Modules  
 
