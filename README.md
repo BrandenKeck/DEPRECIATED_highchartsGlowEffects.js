@@ -1,5 +1,7 @@
 # highchartsGlowEffects.js  
 A plug-in for highcharts.js that allows the user to add glowing effects to hover and select events  
+jsfiddle Hover Example Link:  [Hover Example](https://jsfiddle.net/BrandenKeck/ro0j4qp0/1/)  
+jsfiddle Select Example Link:  [Select Example](https://jsfiddle.net/BrandenKeck/j1d807zg/6/)  
   
 *Warning: using these functions will disable allowPointSelect, select events, and hover events*  
 *Select and hover events can be passed in the form of a function using the plug-in modules*  
@@ -8,7 +10,6 @@ A plug-in for highcharts.js that allows the user to add glowing effects to hover
 # Hover Modules  
 
 ##Basic Info:  
-+ jsfiddle Example Link:  [Hover Example](https://jsfiddle.net/BrandenKeck/ro0j4qp0/1/)
 + These modules will add specified effects to a data point on hover
 + These work best if used on bar, column, or pie charts
   
@@ -36,7 +37,6 @@ A plug-in for highcharts.js that allows the user to add glowing effects to hover
 # Select Modules  
 
 ##Basic Info:  
-+ jsfiddle Example Link:  [Select Example](https://jsfiddle.net/BrandenKeck/j1d807zg/6/)
 + These modules will add specified effects to a data point on select (on click)
 + Hold down "Shift" or "Ctrl" to select multiple points.  The desired effect will be added to all points selected.
 + These work best if used on bar, column, or pie charts
