@@ -6,7 +6,7 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
   
 **Warning: using these functions will disable allowPointSelect, select events, and hover events**  
 **Select and hover events can be passed in the form of a function using the plug-in modules**  
-**You may chose to not pass a functions and colors.  In this case, the parameter will be ignored**
+**You may chose to not pass a functions and colors.  In this case, the parameter will be ignored**  
 **To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript**  
 
   
