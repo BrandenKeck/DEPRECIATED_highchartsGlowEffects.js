@@ -1,12 +1,12 @@
 # highchartsGlowEffects.js  
 A plug-in for highcharts.js that allows the user to add glowing effects to hover and select events  
-jsfiddle Hover Example Link:  [Hover Example](http://www.brandenkeck.com/res/js/GlowEffects/glowChartsPractice.html)  
-jsfiddle Select Example Link:  [Select Example](http://www.brandenkeck.com/res/js/GlowEffects/glowChartsPractice2.html)  
+jsfiddle Hover Example Link:  [Hover Example](https://jsfiddle.net/BrandenKeck/h4do9cqy/2/)  
+jsfiddle Select Example Link:  [Select Example](https://jsfiddle.net/BrandenKeck/8d3fw2bp/2/)  
 download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highchartsGlowEffects.js)  
   
 **Warning: using these functions will disable allowPointSelect, select events, and hover events**  
 **Select and hover events can be passed in the form of a function using the plug-in modules**  
-**You may chose to not pass a functions and colors.  In this case, the parameter will be ignored**  
+**You may chose to not pass functions and colors.  In this case, the parameter will be ignored**  
 **To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript**  
 
   
