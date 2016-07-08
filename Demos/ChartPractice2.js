@@ -16,7 +16,7 @@ $(function () {
     });
 
 /**	###############################################################*/
-/**	###*/hgeAddSelectRainbow($('#outputChart').highcharts());/**###*/
+/**	###*/hgeAddSelectRainbow($('#outputChart').highcharts(), tabulate, null);/**###*/
 /**	###############################################################*/
 
 });
@@ -66,3 +66,9 @@ $(function () {
 /**	###################################################################################*/
 
 });
+
+function tabulate(){
+	var variable;
+	variable = hgeGetSelected();
+	console.log(variable);
+}

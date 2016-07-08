@@ -11,14 +11,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 var hgeStoreColor = new Array();
 var hgeCurrColor = new Array();
-var hgeSelected = new Array();
+var hgeIsSelected = new Array();
 var hgeUserInterval = new Array();
 var hgeCharts = new Array();
 var hgeChartNumber = 0;
 
 function hgeAddHoverRainbow(myChart, f1, f2){
 	var c = hgeChartNumber;
-	console.log(c);
 	hgeChartNumber++;
 	hgePushCharts(myChart);
 	for(var i=0; i<myChart.series.length; i++){
@@ -143,22 +142,21 @@ function hgeInitSelect(chart, c, i, f1, f2){
 
 function hgePushCharts(chart){
 	hgeCharts.push(chart);
-	hgeSelected.push([]);
+	hgeIsSelected.push([]);
 	hgeStoreColor.push([]);
 	hgeCurrColor.push([]);
 	hgeUserInterval.push([]);
 }
 
 function hgePushRows(c){
-	console.log(c);
-	hgeSelected[c].push([]);
+	hgeIsSelected[c].push([]);
 	hgeStoreColor[c].push([]);
 	hgeCurrColor[c].push([]);
 	hgeUserInterval[c].push([]);
 }
 
 function hgePushColumns(myChart, c, i, j){
-	hgeSelected[c][i].push(false);
+	hgeIsSelected[c][i].push(false);
 	hgeStoreColor[c][i].push(myChart.series[i].data[j].color);
 	hgeCurrColor[c][i].push(myChart.series[i].data[j].color);
 	hgeUserInterval[c][i].push([]);
@@ -184,7 +182,6 @@ function hgeSetGlowColor(c, k, x, type, choice){
 	}
 	
 	if(choice == undefined){choice = "#FFFFFF";}
-	console.log(choice);
 	var newHex = hgeHexToRgb(choice);
 	if(newHex==undefined){
 		var hexFind;
@@ -250,19 +247,34 @@ function hgeRemoveGlowColor(c, k, x){
 
 function hgeLogSelection(c, k, x, color, onSelect, onUnselect){
 	
-	if(!hgeSelected[c][k][x]){
-		hgeSelected[c][k][x] = true;
+	if(!hgeIsSelected[c][k][x]){
+		hgeIsSelected[c][k][x] = true;
 		hgeGetGlowColor(c, k, x);
 		if(hgeIsAFunction(onSelect)){onSelect();}
 		else{console.log("Error: function not found");}
 	}
 	else{
-		hgeSelected[c][k][x] = false;
+		hgeIsSelected[c][k][x] = false;
 		hgeRemoveGlowColor(c, k, x);
 		if(hgeIsAFunction(onUnselect)){onUnselect();}
 		else{console.log("Error: function not found");}
 	}
 			
+}
+
+function hgeGetSelected(){
+	var hgeSelected = [];
+	for(var b=0; b<hgeIsSelected.length; b++){
+		for(var m=0; m<hgeIsSelected[b].length; m++){
+			for(var k=0; k<hgeIsSelected[b][m].length; k++){
+				if(hgeIsSelected[b][m][k]){
+					hgeSelected.push({'chart': hgeCharts[b], 'series': m, 'point': k});
+				}
+			}
+		}
+	}
+	
+	return hgeSelected;
 }
 
 /**Code below this point was recreated using similar code from stackoverflow.com
