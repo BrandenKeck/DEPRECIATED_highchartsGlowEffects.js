@@ -9,6 +9,13 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
 **You may chose to not pass functions and colors.  In this case, the parameter will be ignored**  
 **To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript**  
 
+# Getting the Selected Points  
+##hgeGetSelected() will return an object with properties of the selected points
++ set a variable equal to the function
++ variable[i].chart will return the chart for the ith selection
++ variable[i].series will return the series index for the ith selection
++ variable[i].point will return the point index for the ith selection
++ NOTE: for bar/column charts variable[i].point returns the x-axis index
   
 # Hover Modules  
 
