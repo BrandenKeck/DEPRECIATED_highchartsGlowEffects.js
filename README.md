@@ -10,7 +10,7 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
 **To use this plug-in, place the desired effect function (found below) anywhere after the chart is added in javascript**  
 
 # Getting the Selected Points  
-##hgeGetSelected() will return an object with properties of the selected points
+## hgeGetSelected() will return an object with properties of the selected points
 + set a variable equal to the function
 + variable[i].chart will return the chart for the ith selection
 + variable[i].series will return the series index for the ith selection
@@ -19,16 +19,16 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
   
 # Hover Modules  
 
-##Basic Info:  
+## Basic Info:  
 + These modules will add specified effects to a data point on hover
 + These work best if used on bar, column, or pie charts
   
-###hgeAddHoverRainbow(*chart*, *onHoverFunction()*, *offHoverFunction()*);  
+### hgeAddHoverRainbow(*chart*, *onHoverFunction()*, *offHoverFunction()*);  
 + this function will constantly change the color of the data point while hovering
 + pass your chart in the form of $("#chartContainer").highcharts();  
 + pass functions using only the function name without parenthesis
   
-###hgeAddHoverFlash(*chart*, *color*, *onHoverFunction()*, *offHoverFunction()*);  
+### hgeAddHoverFlash(*chart*, *color*, *onHoverFunction()*, *offHoverFunction()*);  
 + this function will cause the data point to change color between an initial color and one chosen when hovering
 + if no color is chosen a default color will be set
 + "Flash" means that the color change will be gradual
@@ -36,7 +36,7 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
 + pass color as a hex value or shortcut (i.e. "red").  Do not use rgb, etc.
 + pass functions using only the function name without parenthesis
   
-###hgeAddHoverBlink(*chart*, *color*, *onHoverFunction()*, *offHoverFunction()*);  
+### hgeAddHoverBlink(*chart*, *color*, *onHoverFunction()*, *offHoverFunction()*);  
 + this function will cause the data point to change color between an initial color and one chosen when hovering
 + if no color is chosen a default color will be set
 + "Blink" means that the color changes will be instant
@@ -46,17 +46,17 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
   
 # Select Modules  
 
-##Basic Info:  
+## Basic Info:  
 + These modules will add specified effects to a data point on select (on click)
 + Hold down "Shift" or "Ctrl" to select multiple points.  The desired effect will be added to all points selected.
 + These work best if used on bar, column, or pie charts
   
-###hgeAddSelectRainbow(*chart*, *onSelectFunction()*, *offSelectFunction()*);  
+### hgeAddSelectRainbow(*chart*, *onSelectFunction()*, *offSelectFunction()*);  
 + this function will constantly change the color of the data point while the point is selected
 + pass your chart in the form of $("#chartContainer").highcharts();  
 + pass functions using only the function name without parenthesis
   
-###hgeAddSelectFlash(*chart*, *color*, *onSelectFunction()*, *offSelectFunction()*);  
+### hgeAddSelectFlash(*chart*, *color*, *onSelectFunction()*, *offSelectFunction()*);  
 + this function will cause the data point to change color between an initial color and one chosen when a point is selected
 + if no color is chosen a default color will be set
 + "Flash" means that the color change will be gradual
@@ -64,7 +64,7 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/highch
 + pass color as a hex value or shortcut (i.e. "red").  Do not use rgb, etc.
 + pass functions using only the function name without parenthesis
   
-###hgeAddSelectBlink(*chart*, *color*, *onSelectFunction()*, *offSelectFunction()*);  
+### hgeAddSelectBlink(*chart*, *color*, *onSelectFunction()*, *offSelectFunction()*);  
 + this function will cause the data point to change color between an initial color and one chosen a point is selected
 + if no color is chosen a default color will be set
 + "Blink" means that the color changes will be instant
