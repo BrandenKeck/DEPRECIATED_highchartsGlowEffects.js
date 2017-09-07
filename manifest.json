@@ -23,14 +23,12 @@
 		"hover"
 	],
 	"download": "www.brandenkeck.com/res/downloads/hge/highchartsGlowEffects.js",
-	"demo": [
-		"https://jsfiddle.net/BrandenKeck/7r7fg093/",
-	],
+	"demo":"https://jsfiddle.net/BrandenKeck/7r7fg093/",
 	"maintainers": [
 		{
 			"name": "Branden Keck",
 			"email": "bmkeck62@gmail.com",
 			"url": "www.brandenkeck.com"
 		}
-	]	
+	]
 }
