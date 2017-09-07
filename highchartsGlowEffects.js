@@ -1,5 +1,5 @@
 /**Highcharts Glow Effects
-Created Summer 2016
+Last Update: Fall 2017
 Author: Branden Keck
 www.brandenkeck.com
 你好，世界*/
@@ -9,111 +9,133 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*/
 
+//Globally Stored Variables.  Sets effect colors / which are selected / chart data
 var hgeStoreColor = new Array();
 var hgeCurrColor = new Array();
 var hgeIsSelected = new Array();
 var hgeUserInterval = new Array();
 var hgeCharts = new Array();
-var hgeChartNumber = 0;
+var hgeChartNumber = -1;
 
-function hgeAddHoverRainbow(myChart, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 1);
+//If unrecognized, [Array].indexOf(element) is added as a prototype operation
+//Used to return -1 for elements that do not yet exist
+$(function(){
+	if (!Array.prototype.indexOf){
+		Array.prototype.indexOf = function(searchValue, index) {
+			var len = this.length >>> 0;
+			index |= 0;
+			if (index < 0){index = Math.max(len - index, 0);}
+			else if (index >= len){return -1;}
+			if (searchValue === undefined)
+				do {
+					if (index in this && this[index] === undefined){return index;}
+				} while (++index !== len)
+			else
+				do {
+					if (this[index] === searchValue){return index;}
+				} while (++index !== len)
+			return -1;
+		};
+	}
+});
+
+//These six functions are those called by the user to set effects for an entire chart
+function hgeAddHoverRainbow(myChart, f1, f2){hgeInitialize(false, 1, false, undefined, null, null, myChart, f1, f2);}
+function hgeAddSelectRainbow(myChart, f1, f2){hgeInitialize(true, 1, false, undefined, null, null, myChart, f1, f2);}
+function hgeAddHoverFlash(myChart, color, f1, f2){hgeInitialize(false, 2, false, color, null, null, myChart, f1, f2);}
+function hgeAddSelectFlash(myChart, color, f1, f2){hgeInitialize(true, 2, false, color, null, null, myChart, f1, f2);}
+function hgeAddHoverBlink(myChart, color, f1, f2){hgeInitialize(false, 3, false, color, null, null, myChart, f1, f2);}
+function hgeAddSelectBlink(myChart, color, f1, f2){hgeInitialize(true, 3, false, color, null, null, myChart, f1, f2);}
+function hgeAddHoverPlain(myChart, color, f1, f2){hgeInitialize(false, 4, false, color, null, null, myChart, f1, f2);}
+function hgeAddSelectPlain(myChart, color, f1, f2){hgeInitialize(true, 4, false, color, null, null, myChart, f1, f2);}
+
+//The following six functions are  called by the user to set effects for individual datapoints
+function hgeAddIndividualHoverRainbow(myChart, row, col, f1, f2){hgeInitialize(false, 1, true, undefined, row, col, myChart, f1, f2);}
+function hgeAddIndividualSelectRainbow(myChart, row, col, f1, f2){hgeInitialize(true, 1, true, undefined, row, col, myChart, f1, f2);}
+function hgeAddIndividualHoverFlash(myChart, row, col, color, f1, f2){hgeInitialize(false, 2, true, color, row, col, myChart, f1, f2);}
+function hgeAddIndividualSelectFlash(myChart, row, col, color, f1, f2){hgeInitialize(true, 2, true, color, row, col, myChart, f1, f2);}
+function hgeAddIndividualHoverBlink(myChart, row, col, color, f1, f2){hgeInitialize(false, 3, true, color, row, col, myChart, f1, f2);}
+function hgeAddIndividualSelectBlink(myChart, row, col, color, f1, f2){hgeInitialize(true, 3, true, color, row, col, myChart, f1, f2);}
+function hgeAddIndividualHoverPlain(myChart, row, col, color, f1, f2){hgeInitialize(false, 4, true, color, row, col, myChart, f1, f2);}
+function hgeAddIndividualSelectPlain(myChart, row, col, color, f1, f2){hgeInitialize(true, 4, true, color, row, col, myChart, f1, f2);}
+
+//The following function clears all effects from a chart
+function hgeClearChart(chart){
+	var fourside = hgeCheckCharts(chart); //[0] Does chart exist? [1] If so, what is its index? (If not, null)
+	if(fourside[0]){
+		for(var i=0; i<chart.series.length; i++){
+			for(j=0; j<chart.series[i].data.length; j++){
+				hgeDefaultSettings(chart, i, j);
+				hgeRemoveGlowColor(fourside[1], i, j);
+			}
 		}
-		hgeInitHover(myChart, c, i, f1, f2);
+		hgeCharts.splice(fourside[1], 1);
+		hgeIsSelected.splice(fourside[1], 1);
+		hgeStoreColor.splice(fourside[1], 1);
+		//hgeCurrColor.splice(fourside[1], 1);
+		hgeUserInterval.splice(fourside[1], 1);
+	}else{
+		console.log("Error: Could not clear nonexistant chart")
 	}
 }
 
-function hgeAddSelectRainbow(myChart, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 1);
+function hgeInitialize(iTrigger, mTrigger, gTrigger, color, row, col, chart, f1, f2){
+	
+		var fourside = hgeCheckCharts(chart); //[0] Does chart exist? [1] If so, what is its index? (If not, null)
+
+		//If the chart has not been initialized, create space for it
+		//Else if the chart was initialized and a new effect is being applied to the whole chart
+		if(!fourside[0]){
+			hgeChartNumber++;
+			var c = hgeChartNumber;
+			hgePushCharts(chart);
+			for(var i=0; i<chart.series.length; i++){
+				hgePushRows(c);
+				for(j=0; j<chart.series[i].data.length; j++){
+					hgePushColumns(chart, c, i, j);
+					if(!gTrigger){
+						hgeSetGlowColor(c, i, j, mTrigger, color);
+						if(iTrigger){hgeInitSelect(chart, c, i, j, f1, f2);}
+						else{hgeInitHover(chart, c, i, j, f1, f2);}
+					}
+				}
+			}
+		}else if(!gTrigger){
+			for(var i=0; i<chart.series.length; i++){
+				for(j=0; j<chart.series[i].data.length; j++){
+					hgeSetGlowColor(c, i, j, mTrigger, color);
+					if(iTrigger){hgeInitSelect(chart, c, i, j, f1, f2);}
+					else{hgeInitHover(chart, c, i, j, f1, f2);}
+				}
+			}
 		}
-		hgeInitSelect(myChart, c, i, f1, f2);
-	}
+		
+		//Whether the the chart was initialized or not
+		//Applies or overwrites effect on single data points
+		if(gTrigger){
+			var c = hgeChartNumber;
+			hgeSetGlowColor(c, row, col, mTrigger, color);
+			if(iTrigger){hgeInitSelect(chart, c, row, col, f1, f2);}
+			else{hgeInitHover(chart, c, row, col, f1, f2);}
+		}
+	
 }
 
-function hgeAddHoverFlash(myChart, color, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 2, color);
-		}
-		hgeInitHover(myChart, c, i, f1, f2);
-	}
-}
-
-function hgeAddSelectFlash(myChart, color, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 2, color);
-		}
-		hgeInitSelect(myChart, c, i, f1, f2);
-	}
-}
-
-function hgeAddHoverBlink(myChart, color, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 3, color);
-		}
-		hgeInitHover(myChart, c, i, f1, f2);
-	}
-}
-
-function hgeAddSelectBlink(myChart, color, f1, f2){
-	var c = hgeChartNumber;
-	hgeChartNumber++;
-	hgePushCharts(myChart);
-	for(var i=0; i<myChart.series.length; i++){
-		hgePushRows(c);
-		for(j=0; j<myChart.series[i].data.length; j++){
-			hgePushColumns(myChart, c, i, j);
-			hgeSetGlowColor(c, i, j, 3, color);
-		}
-		hgeInitSelect(myChart, c, i, f1, f2);
-	}
-}
-
-function hgeInitHover(chart, c, i, f1, f2){
+//The next two functions update chart information appropriately
+function hgeInitHover(chart, c, i, j, f1, f2){
 	if(f1 == undefined){f1 = function(){};}
 	if(f2 == undefined){f2 = function(){};}
-	chart.series[i].update({
-		point: {
-			events: {
-				mouseOver: function(){
-					hgeLogSelection(c, this.series.index, this.x, this.color, f1, f2);
-				},
-				mouseOut: function(){
-					hgeLogSelection(c, this.series.index, this.x, this.color, f1, f2);
-				},
+	chart.series[i].data[j].update({
+		events: {
+			mouseOver: function(){
+				hgeLogSelection(c, this.series.index, this.index, this.color, f1, f2);
+			},
+			mouseOut: function(){
+				hgeLogSelection(c, this.series.index, this.index, this.color, f1, f2);
 			},
 		},
+	});
+	chart.series[i].update({
 		states: {
 			hover: {
 				enabled: false,
@@ -122,16 +144,18 @@ function hgeInitHover(chart, c, i, f1, f2){
 	});
 }
 
-function hgeInitSelect(chart, c, i, f1, f2){
+function hgeInitSelect(chart, c, i, j, f1, f2){
 	if(f1 == undefined){f1 = function(){};}
 	if(f2 == undefined){f2 = function(){};}
-	chart.series[i].update({
-		allowPointSelect: false,
+	chart.series[i].data[j].update({
 		events: {
 			click: function(event){
-				hgeLogSelection(c, this.index, event.point.x, event.point.color, f1, f2);
+				hgeLogSelection(c, this.series.index, this.index, this.color, f1, f2);      
 			},
 		},
+	});
+	chart.series[i].update({
+		allowPointSelect: false,
 		states: {
 			select: {
 				enabled: false,
@@ -140,6 +164,36 @@ function hgeInitSelect(chart, c, i, f1, f2){
 	});
 }
 
+function hgeDefaultSettings(chart, i, j){
+	chart.series[i].data[j].update({
+		events: {
+			mouseOver: null,
+			mouseOut: null,
+			click: null
+		},
+	});
+	chart.series[i].update({
+		states: {
+			hover: {
+				enabled: true,
+			},
+			select: {
+				enabled: true,
+			}
+		}
+	});
+	
+}
+
+//Checks if chart has been initialized
+function hgeCheckCharts(c){
+	var check = hgeCharts.indexOf(c);
+	if(check == -1){
+		return [false, null];
+	}else{return [true, check];}
+}
+
+//Next three functions push information to globals
 function hgePushCharts(chart){
 	hgeCharts.push(chart);
 	hgeIsSelected.push([]);
@@ -229,6 +283,9 @@ function hgeSetGlowColor(c, k, x, type, choice){
 					ness = 0;
 				}
 			}, 400);
+		break;
+		case 4:
+			hgeCurrColor[c][k][x] = hgeRGBToHex(newHex.r, newHex.g, newHex.b);
 		break;
 	}
 }

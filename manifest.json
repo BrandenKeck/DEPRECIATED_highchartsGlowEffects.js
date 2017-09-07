@@ -1,6 +1,6 @@
 {
 	"name": "Glow Effects",
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"title": "Glow Effect for Hover and Select Events",
 	"author": {
 		"name": "Branden Keck",
@@ -16,13 +16,13 @@
 		"highcharts": "4.2.5"
 	},
 	"type": "plug-in",
-	"description": "Add a glow effect to hovered or selected items",
+	"description": "Add a glowing effect to hovered or selected items",
 	"keywords": [
 		"glow",
 		"select",
 		"hover"
 	],
-	"download": "www.brandenkeck.com/res/downloads/highchartsGlowEffects.js",
+	"download": "www.brandenkeck.com/res/downloads/hge/highchartsGlowEffects.js",
 	"demo": [
 		"https://jsfiddle.net/BrandenKeck/h4do9cqy/2/",
 		"https://jsfiddle.net/BrandenKeck/8d3fw2bp/3/"

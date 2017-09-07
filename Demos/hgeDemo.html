@@ -1,0 +1,47 @@
+<HTML>
+<BODY bgcolor="white">
+	<a href="SelectDemo.js" target="_blank"><h4>View Source JS for Charts in Separate Window</h4></a>
+	<a href="../../highchartsGlowEffects.js" target="_blank"><h4>View Plug-In Code in Separate Window</h4></a>
+	
+	<hr>
+	<h1>Applying effects to "Selected" data</h1>
+	
+	<h3><u>Example 1:</u> Apply different "on select" effects to each data-point</h3>
+	<h4>Click data to see effects...</h4>
+	<div id="firstExample"></div>
+
+	<h3><u>Example 2:</u> Apply an "on select" effect to all data-points</h3>
+	<h4>Click data to see effects...</h4>
+	<div id="secondExample"></div>
+	
+	<h3><u>Note:</u> The use of hgeGetSelected() will return an object with all selected datapoints. (If none are selected, the array returns empty).</h3>
+	<h4 style="display: inline">Press here to log an object of selected points to the console: </h4>
+	<button onclick="tabulate()">Click Here</button>
+		<h4>This returns an object with properties object.chart, object.series, and object.point for each selected point</h4>
+	<br><br>
+	
+	<hr>
+	<h1>Applying effects to data "On Hover"</h1>
+	<hr>
+	
+	<h3><u>Example 3:</u> Doing the same thing for "hover" effects instead of "select" effects</h3>
+	<h4>Hover data to see effects...</h4>
+	<div id="thirdExample"></div>
+
+	<h3><u>Example 4:</u> Having fun with iterative effect application of individual color effects</h3>
+	<h4>Hover data to see effects...</h4>
+	<div id="fourthExample"></div>
+	
+	<h3><u>Note:</u> The use of hgeClearChart(chart) will remove all effects from a chart </h3>
+	<h4 style="display: inline">Press here to remove the hover effects from the Example 4 chart: </h4>
+	<button onclick="removeEffects()">Click Here</button>
+	<h4>When this function is used, default Highcharts settings are restored.</h4>
+	<br><br>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="IndividualSelectDemo.js"></script>
+	<script src="../../highchartsGlowEffects.js"></script>
+</BODY>
+</HEAD>
+</HTML>
