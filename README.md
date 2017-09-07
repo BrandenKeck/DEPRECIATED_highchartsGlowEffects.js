@@ -99,7 +99,7 @@ download link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/hge/hi
 + this variation adds the same effect to an individual data point
 
 ### hgeAddHoverPlain(*chart*, *color*, *onSelectFunction()*, *offSelectFunction()*);  
-+ this function applies a simple select effect of unchanging color
++ this function applies a simple hover effect of unchanging color
 + if no color is chosen a default color will be set
 + pass your chart in the form of $("#chartContainer").highcharts();  
 + pass color as a hex value or shortcut (i.e. "red").  Do not use rgb, etc.
