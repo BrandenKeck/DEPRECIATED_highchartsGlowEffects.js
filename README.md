@@ -1,4 +1,6 @@
-# highchartsGlowEffects.js  
+Please note that this code no longer works with the most recent version of highcharts
+
+# (DEPRECIATED) highchartsGlowEffects.js  
 A plug-in for highcharts.js that allows the user to add glowing effects to hover and select events  
 Self-hosted Demo:  [HTML-facing Demo](http://www.brandenkeck.com/res/downloads/hge/Demos/hgeDemo.html)  
 Download Link:  [View/Copy Code](http://www.brandenkeck.com/res/downloads/hge/highchartsGlowEffects.js)  
